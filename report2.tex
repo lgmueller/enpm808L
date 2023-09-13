@@ -1,0 +1,74 @@
+\documentclass[journal]{IEEEtran}
+%\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% listings package for code blocks
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+% overfull \hbox .. too wide 
+\setlength{\emergencystretch}{10pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,      
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},           
+    captionpos=b,
+}
+
+\lstset{style=mystyle}
+
+\title{Investigating Decision Trees}
+
+\author{
+\IEEEauthorblockN{Lillian Mueller}
+\IEEEauthorblockA{lmuelle1@umd.edu}
+and
+IEEEauthorblockN{Regina Hong}
+IEEEauthorblockA{rhong@umd.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+\label{log:abstract}
+
+\end{abstract}
+
+\section{Introduction}
+
+\section{Methodology}
+\begin{lstlisting}[language=Python, caption=Libraries used for this assignment.]
+import numpy as np
+\end{lstlisting}
+
+
+\section{Results}
+
+
+\section{Discussion}
+
+\begin{thebibliography}{00}
+\bibitem{b1} 
+\bibitem{b2} 
+
+\end{thebibliography}
+
+\end{document}
+

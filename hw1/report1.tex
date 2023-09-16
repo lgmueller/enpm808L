@@ -1,0 +1,470 @@
+\documentclass[journal]{IEEEtran}
+%\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% listings package for code blocks
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\begin{document}
+
+% overfull \hbox .. too wide 
+\setlength{\emergencystretch}{10pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,      
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},           
+    captionpos=b,
+}
+
+\lstset{style=mystyle}
+
+\title{Exploration of Python and its Libraries}
+
+\author{
+\IEEEauthorblockN{Lillian Mueller}
+\IEEEauthorblockA{lmuelle1@umd.edu}
+%\and
+%\IEEEauthorblockN{Second Student Name}
+%\IEEEauthorblockA{email address two}
+}
+
+\maketitle
+
+\begin{abstract}
+\label{log:abstract}
+In the course ENPM 808L, Analysis for Decision Support, the students will be utilizing Python during their exploration of various data models and analytical techniques to most effectively and accurately support data-driven decision making and prediction models. Before the deep dive, the student must first understand Python and simple libraries to aid in this exploration. This report will outline simple data structures commonly used in Python, usage of NumPy, Matplotlib, and Pandas libraries, and how each of these elements work together.
+\end{abstract}
+
+\section{Introduction}
+Python is a programming language that is increasingly growing in popularity. With a plethora of implementable library, this language can be used in almost any application ranging from simple scripts, data analysis and visualization, to software and web development \cite{b1}. Learning the basics of this language is very advantageous as it equips the developer or programmer tools for rapid prototyping of software and other developments. Additionally, as Python grows in popularity, it is becoming a universal language that most people can understand and use to collaborate on projects. In this report, I will be demonstrating basic Python skills and techniques to serve as building blocks for future Python projects and development. These demonstrations will include basic data structures commonly used in Python such as strings, lists, dictionaries, and numerical variables, simple array manipulation, and fundamental data ingestion and visualization. 
+
+\section{Methodology}
+To begin this assignment, I first had to install Python and an IDE. Upon downloading Python 3.11, I also downloaded VS code for my IDE. Within my Python virtual environment, I also downloaded select libraries to aid my exploration of Python: Jupiter, NumPy, pandas, functools, and matplotlib. 
+\begin{lstlisting}[language=Python, caption=Libraries used for this assignment.]
+import numpy as np
+import functools
+from numpy.random import default_rng
+import pandas as pd
+import matplotlib.pyplot as plt
+\end{lstlisting}
+
+\subsection{String and Numerical Values}
+
+Like many other programming languages, Python has both string type and various numeric type variables. In this section, the student will be demonstrating the difference between manipulating a string type variable and a numeric type variable. 
+To investigate the string, a variable was set to the string “Unsupervised learning needs a target.” The student then transformed this string into a string in all caps. 
+\begin{lstlisting}[language=Python, caption={Converting a String to Uppercase.}]
+str = "Unsupervised learning needs a target."
+print('Original String: ', str)
+
+# Make string uppercase
+str_upper = str.upper()
+print('Uppercase: ', str_upper)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={String Investigation Ouput}]
+Original String: Unsupervised learning needs a target.
+Uppercase: UNSUPERVISED LEARNING NEEDS A TARGET.
+\end{lstlisting}
+
+
+To investigate the numeric type, the student instantiated two variables to a numerical value and then incremented both variables by 1. The code is shown below.
+\begin{lstlisting}[language=Python, caption={Modifying Numerical Values}]
+# Numerical 
+a = 9
+b = 2
+print("Original Values: ")
+print('\ta = ', a) 
+print('\tb = ', b)
+
+# increase values by 1
+a = a + 1
+b = b + 1
+print("Updated values:")
+print('\ta = ', a) 
+print('\tb = ', b)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Numerical Value Investigation Output}]
+Original Values: 
+	a =  9
+	b =  2
+Updated values:
+	a =  10
+	b =  3
+\end{lstlisting}
+
+
+\subsection{Common Data Structures}
+When programming in Python, it is impossible to avoid lists and dictionaries. Lists in Python are collections of things. Many other languages have similar structures and are sometimes referred to as arrays. Dictionaries in Python are a collection of key-value pairs. Each key is used to map to a value which can be a singular variable or another data structure. To investigate these data structures in Python, I practiced manipulating lists and using the data in the lists to create a dictionary.
+
+First, I created 2 lists: one with 5 names (strings), the other with 5 ages (integers). To explore these lists further, I displayed a few properties and printed out every other element in the two lists. The properties I found for each list included the type of variables the lists contained and the lengths. To find the type and length, Python has built-in methods for find both properties. The type of a variable can be found by using \lstinline{type(variable)} and the length of the list can be found by using \lstinline{len(variable)}. In another exploration case, I manipulated the list in order to only print out every other element. To do this, I used list comprehension and added the elements of the list only if the index of that element was divisible by 2. Therefore, only elements with the indices 0, 2, and 4 would be added to the list and printed out. 
+\begin{lstlisting}[language=Python, caption=Instantiating printing lists of names and ages.]
+# list of names
+L1 = ['Tonia', 'Klaus', 'Lily', 'Maggie', 'Katie']
+print("Properties of L1:")
+print("\tType:", type(L1), 'of', type(L1[0]))
+print("\tLength:", len(L1))
+
+# list of ages
+L2 = [62, 60, 24, 22, 23]
+print("Properties of L1:")
+print("\tType:", type(L2), 'of', type(L2[0]))
+print("\tLength:", len(L2))
+
+# print every other element in the two lists 
+# add element from list if index is divisable by 2
+# print list 
+print("Print every other element in lists:")
+print([L1[i] for i in range(len(L1)) if i%2==0])
+print([L2[i] for i in range(len(L2)) if i%2==0])
+\end{lstlisting}
+
+\begin{lstlisting}[caption={List Output of Properties and Every Other Element}]
+Properties of L1:
+    Type: <class 'list'> of <class 'str'>
+    Length: 5
+Properties of L1:
+    Type: <class 'list'> of <class 'int'>
+    Length: 5
+Print every other element in lists:
+['Tonia', 'Lily', 'Katie']
+[62, 24, 23]
+\end{lstlisting}
+
+My next task was to convert the two lists (original names and ages lists) into a dictionary, where the names of L1 were the keys, and the ages of L2 were the values. In order to do this, I first created an empty dictionary and then wrote a for loop. In the for loop, I looped through the indices of the list and for each index I would pair the key element from L1 and the value element from L2 and add an entry into the dictionary. I knew that looping though the indices would work because both lists were the same length. The dictionary this procedure created is shown below. 
+\begin{lstlisting}[language=Python, caption=Instantiating a Dictionary]
+# create empty dictionary 
+dictionary = {}
+
+# go through all indices of lists
+for i in range(len(L1)):
+    # add dict entry using L1 as key and L2 as value
+    # while assigning values to key, increment age
+    dictionary[L1[i]] = L2[i] + 1
+    
+dictionary
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Dictionary Output}]
+{'Tonia': 63, 'Klaus': 61, 'Lily': 25, 'Maggie': 23, 'Katie': 24}    
+\end{lstlisting}
+
+My next challenge was to create a new list of unique values and derive a new list where each element was the difference from the mean of the original list. Additionally, I had to complete this task using two different methods: one using a function, and the other using list comprehension. I wrote a function that required a list as a parameter. Once in the function, the list would be converted into a NumPy array and used the NumPy library method, \lstinline{mean()}, to find the average. The function then instantiates a new list, and for each element in the given list, it takes the original value and subtracts the calculated mean and appends the new value to the new list. After running through the for loop, it returns the new list. Using the function, I supplied the original list and got the desired list as a result.
+\begin{lstlisting}[language=Python, caption=Modifying Lists with Functions]
+# create new list 
+print("Original L2:\n\t", L2)
+L2 = [12, 62, 92, 147, 3]
+
+# implementing a function that creates a new list of elements showing its difference from the average of the list
+def getXBar(lst):
+    # convert list to numpy array 
+    lst = np.array(lst)
+    newLst = [] 
+    for i in range(len(lst)):
+        # get difference from lst mean to element
+        newLst.append(lst.mean()-lst[i])
+    return newLst
+
+# get new list using a function
+L2_func = getXBar(L2)
+print("Using a function:\n\t", L2_func)
+\end{lstlisting}
+\begin{lstlisting}[caption=List Output]
+Original L2:
+	 [62, 60, 24, 22, 23]
+Using a function:
+	 [51.2, 1.2000000000000028, -28.799999999999997, -83.8, 60.2]
+
+\end{lstlisting}
+
+To use list comprehension, I again calculated the mean of the list. For this calculation, rather than converting the list to a NumPy array, I used lambda calculus to create quick functions to determine the sum of the array. In Python, \lstinline{lambda} expressions in Python allow the user to implement quick anonymous functions in a functional way. The first operation, I established was adding two variables together; I bound variables x and y to a simple operation: \lstinline{x + y}. Then, I used the functools Python library to create a fold-left function. For each element it in the list, it adds the element to the accumulator. The accumulator here starts with 0 and continues to add to this value until the sum is acquired. To finish the calculation of the mean, I divided the sum by the length of the list, using the \lstinline{len()} built in function. Finally, using the list comprehension, I create a list but going through the element of the list and add the mean minus the element from the original list to the new one. 
+{CODE-list comprehension}
+\begin{lstlisting}[language=Python, caption=Modifying Lists with List Comprehension]
+# create new list 
+print("Original L2:\n\t", L2)
+L2 = [12, 62, 92, 147, 3]
+
+# get new list using list comprehension 
+# calculate average of list 
+add = lambda x, y: x + y
+getSum = lambda xs, acc: functools.reduce(add, xs, acc)
+average = getSum(L2, 0)/len(L2)
+
+L2_comp = [average - L2[i] for i in range(len(L2))]
+print("Using List Comprehension:\n\t", L2_comp)
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Output using List Comprehension}]
+Original L2:
+	[62, 60, 24, 22, 23]
+Using List Comprehension:
+	[51.2, 1.2000000000000028, -28.799999999999997, -83.8, 60.2]
+\end{lstlisting}
+
+\subsection{NumPy Data Structures}
+
+NumPy is an open-source Python library that provides numerical computational tools that can be used for data analytics \cite{b2}. In order to explore this library, I started by creating a 50 one-dimensional array. In order to do this, I used the NumPy random class to generate 50 random float variables (each value between 0 and 1). I multiplied each number by 100 in order to work with larger numbers. Then, I casted this list of variables into a NumPy array type as shown in the code block below. 
+\begin{lstlisting}[language=Python, caption=Instantiating NumPy Array]
+# create a 1D 50 member array 
+arr = np.array(default_rng().random(50)).round(2) * 100
+print("Array:\n", arr)
+\end{lstlisting}
+\begin{lstlisting}[caption={NumPy Array}]
+Array:
+[92.  5. 67.  7. 54. 53. 27. 32. 29.  2. 55. 78. 31. 63. 36. 36. 94. 50.
+80. 67. 43. 20. 14. 49.  3. 27. 35. 31. 13. 68. 86. 53. 80. 25. 56. 82.
+7. 12. 21. 75. 43. 31. 31. 60. 68. 64. 33. 66. 79. 50.]
+\end{lstlisting}
+
+The next step in this exploration was to manipulate this array. First, I reshaped the array such that the new array had 5 columns. To do this, I used the \lstinline{reshape()} NumPy array method. This method requires two parameters, the number of rows and the number of columns. Since I wanted the new array to have 5 columns, I knew that therefore the new array must have 10 rows. To verify this, I returned the 3rd column of the array. I could verify my procedures had worked if the column had 10 entries and visually had the same values when both the new array and column were printed. 
+\begin{lstlisting}[language=Python, caption=Reshaping Array]
+# reshape to have only 5 columns 
+col5 = arr.reshape(10, 5)
+print('\nReshaping to have 5 columns:\n', col5)
+
+# print 3rd column of array 
+print('\nPrinting 3rd column of array:\n', col5[:,2])
+\end{lstlisting}
+\begin{lstlisting}[caption={Reshaped Array}]
+Reshaping to have 5 columns:
+[[92.  5. 67.  7. 54.]
+[53. 27. 32. 29.  2.]
+[55. 78. 31. 63. 36.]
+[36. 94. 50. 80. 67.]
+[43. 20. 14. 49.  3.]
+[27. 35. 31. 13. 68.]
+[86. 53. 80. 25. 56.]
+[82.  7. 12. 21. 75.]
+[43. 31. 31. 60. 68.]
+[64. 33. 66. 79. 50.]]
+
+Printing 3rd column of array:
+[67. 32. 31. 50. 14. 31. 80. 12. 31. 66.]
+\end{lstlisting}
+
+Next, I create a new array where every value was the squared value of the original array’s values. In order to do this, I used the \lstinline{map()} function. This is a built-in Python function that applies a specified function to each element in an iterable object. In this case, the iterable object was my original array and I created a \lstinline{lambda} expression that required one variable and multiplied that value by itself. 
+\begin{lstlisting}[language=Python, caption=Squaring each Element in Array]
+# create new array with every value squared 
+sq = list(map(lambda x: x*x, arr))
+print('\nArray of sqaured Values:\n', sq)
+\end{lstlisting}
+\begin{lstlisting}[caption={Squared Array}]
+Array of sqaured Values:
+[961.0, 9.0, 6241.0, 196.00000000000006, 1521.0, 729.0, 4096.0, 2601.0, 5929.0, 361.0, 0.0, 5929.0, 729.0, 8836.0, 1156.0, 7744.0, 2809.0, 400.0, 100.0, 3969.0, 4356.0, 8100.0, 196.00000000000006, 8836.0, 3025.000000000001, 196.00000000000006, 9.0, 484.0, 5041.0, 840.9999999999998, 4096.0, 2500.0, 1024.0, 1849.0, 2809.0, 1156.0, 6889.0, 1024.0, 2401.0, 900.0, 0.0, 5625.0, 3600.0, 3721.0, 6084.0, 8100.0, 7569.0, 6561.0, 2601.0, 5041.0]
+\end{lstlisting}
+
+When dealing to datasets, learning how to manipulate these arrays will be very helpful. Here, I demonstrate how to multiply whole arrays by scalar values and filter the arrays. In order to multiply the array by a scalar value, I simply multiplied the array but the value of 2. In order to filter the array, I utilized list comprehension again and only added values from the original array to the new array if the value was greater than 10. I then also found the sum of this new array using the getSum lambda expression I defined in an earlier step. Once I created these two new derivations from the old array, I converted the array into a Pandas dataframe (where the array was a column in the dataframe) and using the Pandas \lstinline{describe()} method to get basic statistics of the dataset which included the 5 number summary, number of elements, the mean, as well as the standard deviation.  
+\begin{lstlisting}[language=Python, caption=NumPy Array Manipulation]
+print("Array:\n", arr)
+
+# multiply array by scalar value 
+mulBy2 = arr * 2
+print("\nMultiply array by scalar value of 2:\n", mulBy2)
+
+# array with values > 10 
+greaterThan10 = np.array([x for x in arr if x > 10 ])
+print("\nArray with values > 10:\n", greaterThan10) 
+
+# what is the sum of those values? 
+# using sum function from previous exercise: 
+sum = getSum(greaterThan10, 0)
+print('\nSum of array with values greater than 10:', sum)
+
+# Statistics of each dataset
+print("Statistics for array multiplied by scalar value (2):")
+print(pd.DataFrame(mulBy2).describe())
+
+print("Statistics for array with values > 10:")
+print(pd.DataFrame(greaterThan10).describe())
+\end{lstlisting}
+\begin{lstlisting}[caption={Arrays following Manipulation}]
+Array:
+ [92.  5. 67.  7. 54. 53. 27. 32. 29.  2. 55. 78. 31. 63. 36. 36. 94. 50.
+ 80. 67. 43. 20. 14. 49.  3. 27. 35. 31. 13. 68. 86. 53. 80. 25. 56. 82.
+  7. 12. 21. 75. 43. 31. 31. 60. 68. 64. 33. 66. 79. 50.]
+
+Multiply array by scalar value of 2:
+ [184.  10. 134.  14. 108. 106.  54.  64.  58.   4. 110. 156.  62. 126.
+  72.  72. 188. 100. 160. 134.  86.  40.  28.  98.   6.  54.  70.  62.
+  26. 136. 172. 106. 160.  50. 112. 164.  14.  24.  42. 150.  86.  62.
+  62. 120. 136. 128.  66. 132. 158. 100.]
+
+Array with values > 10:
+ [92. 67. 54. 53. 27. 32. 29. 55. 78. 31. 63. 36. 36. 94. 50. 80. 67. 43.
+ 20. 14. 49. 27. 35. 31. 13. 68. 86. 53. 80. 25. 56. 82. 12. 21. 75. 43.
+ 31. 31. 60. 68. 64. 33. 66. 79. 50.]
+
+Sum of array with values greater than 10: 2259.0
+
+Statistics for array multiplied by scalar value (2):
+               0
+count   50.00000
+mean    91.32000
+std     51.23234
+min      4.00000
+25%     55.00000
+50%     92.00000
+75%    133.50000
+max    188.00000
+Statistics for array with values > 10:
+               0
+count  45.000000
+mean   50.200000
+std    22.792144
+min    12.000000
+25%    31.000000
+50%    50.000000
+75%    67.000000
+max    94.000000
+\end{lstlisting}
+
+\subsection{Data Ingress and Visualization}
+
+In this final investigation, I explore reading files, interpreting the data within the file, and creating figures to represent the data. First, I start by reading in a TXT file which contains data related to name popularity in the year of 1999. To do this, I open the file as read only and read the file line by line. I know from looking at the TXT file that each line contains the baby’s name, the gender of the baby, and finally the number of babies with that name from 1999. As these elements were separated by columns, I first split the line at each comma, using the \lstinline{split()} string method. Additionally, in the text file, each line had a newline character at the end , so to remove this character, I used the \lstinline{replace()} string method to replace the \lstinline{\n} with nothing. Using these two methods, I was able to isolate each element from the line and create a list. I think appended this list to the collection of data taken from the file. After all lines were read, I closed the buffer to the text file. With all the corresponding data in separate lists within a bigger list, used this list of lists data structure as an input to instantiate a Pandas dataframe. Once in the dataframe, I converted the count column into integers as they were previously entered as strings.
+\begin{lstlisting}[language=Python, caption={Reading TXT file data}]
+# read in txt file
+txtFile = r'yob1999.txt'
+names = []
+with open(txtFile, 'r') as f: 
+    for line in f:
+        # split line by commas and remove newline character
+        entry = line.replace('\n', '').split(',')
+        names.append(entry)
+    f.close()
+
+# Convert data into a dataframe, columns are names, sex, and count
+names = pd.DataFrame(names, columns=['name', 'gender', 'count'])
+# convert count into int 
+names['count'] = names['count'].astype(int)
+names.head()
+\end{lstlisting}
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c }
+ & name & gender & count \\ 
+\hline
+0 & Emily & F & 26539 \\  
+1 & Hannah & F & 21678 \\
+2 & Alexis & F & 19235 \\
+3 & Sarah & F & 19115 \\
+4 & Samantha & F & 19041
+\end{tabular}
+\caption{Dataframe of names and counts}
+\end{table}
+
+To better visualize the data, I create various histograms to show some of the data collected from the text file. First, using the Python library Matplotlib, I created a histogram of the first 10 entries in the dataframe. I added a title, x and y labels, and also rotated the x tick labels to be more readable. 
+\begin{lstlisting}[language=Python, caption={Creating and Styling Histogram}]
+# plot a histogram of names and counts 
+plt.bar(names['name'].iloc[range(10)], names['count'].iloc[range(10)])
+plt.title('Histogram of (First 10) Name Counts in 1999')
+plt.ylabel("Number of Babies with Name")
+plt.xlabel("Name")
+plt.xticks(rotation='vertical')
+plt.show()
+\end{lstlisting}
+\begin{figure}[h!]
+\includegraphics[scale=.5]{first10.png}
+\centering
+\caption{Histogram of First 10 Names in Dataframe}
+\end{figure}
+
+Choosing only the first 10 entries does not represent the dataset very well. Therefore, I continued this exploration and sorted the data frame by count number and graphed the top 10 names with the greatest number of counts. 
+\begin{lstlisting}[language=Python, caption={Sorting Data and Creating Histogram}]
+# plot a histogram of top 10 names and counts 
+# sort by count
+names.sort_values(by=['count'], ascending=False, inplace=True)
+
+# plot graph
+plt.bar(names['name'].iloc[range(10)], names['count'].iloc[range(10)])
+plt.title('Histogram of (Top 10) Name Counts in 1999')
+plt.ylabel("Number of Babies with Name")
+plt.xlabel("Name")
+plt.xticks(rotation='vertical')
+plt.show()
+\end{lstlisting}
+\begin{figure}[h!]
+\includegraphics[scale=.5]{top10.png}
+\centering
+\caption{Histogram of Top 10 Names in Dataframe}
+\end{figure}
+
+I took this one step further by grouping the sorted dataframe by gender and graphed the top 10 female and top 10 male names on separate graphs. This showed the viewer a more interesting representation of the data as it organized the data to have more meaning. 
+\begin{lstlisting}[language=Python, caption={Splitting Dataframe by Gender and Graphing Top 10 Names Histogram for each Gender}]
+# find top 10 names for male and female 
+# group dataframes by F and M 
+groupByGender = names.groupby(by=['gender'])
+femaleNames = groupByGender.get_group("F")
+maleNames = groupByGender.get_group("M")
+
+# create plots 
+fig, ax = plt.subplots(1, 2)
+
+# editing female names plot
+ax[0].bar(
+    femaleNames['name'].iloc[range(10)], 
+    femaleNames['count'].iloc[range(10)]
+    )
+ax[0].set(
+    title='Top Female Names',
+)
+ax[0].tick_params(labelrotation=60)
+
+ax[1].bar(
+    maleNames['name'].iloc[range(10)], 
+    maleNames['count'].iloc[range(10)]
+)
+ax[1].set(
+    title='Top Male Names', 
+)
+ax[1].tick_params(labelrotation=60)
+
+fig.savefig('top10FandM')
+fig.show()
+\end{lstlisting}
+\begin{figure}[h!]
+\includegraphics[scale=.5]{top10FandM.png}
+\centering
+\caption{Histogram of Top 10 Names for Females and Males}
+\end{figure}
+
+\section{Results}
+
+\subsection{String and Numeric Values}
+String and numerical variables are the building blocks of any language. Manipulating numerical variables in Python is similar to many other languages. These variable types allow the user to perform simple mathematical operations and reassign another value to the same variable name. On the other hand, strings are treated as objects. Strings can be manipulated through methods belonging to the String class in Python.
+
+\subsection{List Comprehension and Data Structure Manipulations}
+There are countless ways of manipulating lists in Python and each method has advantages and disadvantages. In this exercise, I discovered list comprehension and using functions to get a desired output. Both methods are valid methods of manipulating the lists and both returned concurrent answers. However, through implementing both procedures, I realized each possessed positives and negatives. List comprehension is very concise; this method allows the programmer to quickly manipulate or repopulate a list efficiently. However, list comprehension can get very convoluted and hard to interpret if the list is undergoing multistep or complex changes. If a programmer wants to use a list for more advanced and complex manipulation, a function would be better. Functions allow the programmer to clearly show what each step is doing and how the list is changing or getting rearranged. 
+
+\subsection{Data Manipulation}
+The Python library NumPy has great numerical computing power. In future projects, using these tools to clean data sets and manipulate the data will be very advantageous when trying to understand and interpret various techniques and skills. Using NumPy arrays especially give the programmer more capacity to develop and manipulate series of numerical data compared to Python native lists. 
+
+\subsection{Data Visualization}
+Data visualization is very important when presenting data and results. Being able to read data from various sources and visualize the data will be essential when dealing with analytics for decision support software and models. Data can easily be misinterpreted or misleading simply based on how it is presented. The various ways the data can be plotted proves how some graphs can be more helpful and truthful than others. 
+
+\section{Discussion}
+Over the course of this exercise, I was able to better understand native Python syntax and data structures as well as explore helpful libraries that may help with data manipulation and visualization. While the tasks seemed simplistic, I learned how certain attributes can be leveraged for higher level data manipulation and analysis. These skills all have advantages and disadvantages that may lend certain methods more useful that others in certain situations. Ultimately, it is up to the programmer to make the design decisions that best suits the project. These design decisions may include performance and efficiency, and may be influenced by the audience, stakeholders, and developer preferences. 
+
+\begin{thebibliography}{00}
+\bibitem{b1} E. Kosourova, "What is Python Used For," Data Camp, November 2022. [Online]. Available: https://www.datacamp.com/blog/what-is-Python-used-for. [Accessed 4 September 2023].
+\bibitem{b2} [Online]. Available: https://numpy.org/. [Accessed 5 September 2023].
+
+\end{thebibliography}
+
+\end{document}
+

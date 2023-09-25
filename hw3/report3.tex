@@ -179,7 +179,61 @@ Decision Tree & 	1.00	& 0.92	& 0.874
 
 As the current logistic regression model included the default parameter of \lstinline{penalty='l2'}, a different iteration of the model with \lstinline{penalty=None} was also compared with the results from the Decision Tree model. These three models (Decision Tree, logistic regression with penalty, and logistic regression without penalty) were all run 1000 times each. 
 
-\[INSERTTABLES\]
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c }
+    Description & Train Data Accuracy & Test Data Accuracy & r2 Score \\
+\hline
+count   &            1000.0   &      1000.000 &  1000.000\\
+mean    &               1.0   &         0.930 &     0.889\\
+std     &               0.0   &         0.015 &     0.024\\
+min     &               1.0   &         0.920 &     0.873\\
+25\%    &                1.0  &          0.920 &     0.873\\
+50\%    &                1.0  &          0.920 &     0.873\\
+75\%    &                1.0  &          0.940 &     0.905\\
+max     &               1.0   &         0.960 &     0.936\\
+\end{tabular}
+\caption{Statistics for Decision Tree utilizing Gini Impurity Criterion}
+\label{table:dtGI}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c }
+    Description & Train Data Accuracy & Test Data Accuracy & r2 Score \\
+\hline
+count       &       1000.00    &         1000.00&  1000.000 \\
+mean        &          0.98    &            0.94&     0.905 \\
+std         &          0.00    &            0.00&     0.000 \\
+min         &          0.98    &            0.94 &    0.905 \\
+25\%        &           0.98   &             0.94 &    0.905 \\
+50\%        &           0.98   &             0.94 &    0.905 \\
+75\%        &           0.98   &             0.94 &    0.905 \\
+max         &          0.98    &            0.94  &   0.905 \\
+\end{tabular}
+\caption{Statistics for Logistic Regression with L2 Penalty}
+\label{table:logRegL2}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c }
+    Description & Train Data Accuracy & Test Data Accuracy & r2 Score \\
+\hline
+count      &         1000.0     &        1000.00 & 1000.000\\
+mean       &            1.0      &          0.96 &    0.936\\
+std        &            0.0      &          0.00 &    0.000\\
+min        &            1.0      &          0.96 &    0.936\\
+25\%       &             1.0     &           0.96 &    0.936\\
+50\%       &             1.0     &           0.96 &    0.936\\
+75\%        &            1.0     &           0.96 &    0.936\\
+max        &            1.0      &          0.96  &   0.936\\
+\end{tabular}
+\caption{Statistics for Logistic Regression without Penalty}
+\label{table:logRegL2}
+\end{table}
+
+    
 
 \subsection{New Classifications Using Logistic Regression}
 When using the \lstinline{predict_proba} function to create a ranking of the results of the logistic regression model, the output was compared to the original Iris dataset to see how the model probabilities compare to the actual Iris flower classification. A truncated version of this dataframe with randomly selected results is shown below:

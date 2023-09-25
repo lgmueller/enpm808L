@@ -37,7 +37,7 @@
 
 \lstset{style=mystyle}
 
-\title{Investigating Decision Trees}
+\title{Iris Classification Using Logistic Regression}
 
 \author{
 \IEEEauthorblockN{Lillian Mueller}
@@ -235,7 +235,7 @@ max        &            1.0      &          0.96  &   0.936\\
 
 As the accuracy converges for each model, these methods can be more effectively compared. From these tables, it can be inferred that the logistic regression models are better predictors of the iris dataset. The decision tree model had an average accuracy of .93 when applied to the test datasets whereas the logistic models had accuracies of .94 and .96, with penalty and without respectively. As seen in the past, the decision tree's training data accuracy was 1.0 and the test data accuracy was much lower at .93 which indicates overfitting to the training dataset. 
 
-Comparing the logistic models specifically, the model without implementing any penalty functions seems to perform better with a mean accuracy of .96. The accuracy for the model with penalty was .94. The r2 scores have a similar trend where the model without penalty had a mean r2 score of .936 and the model with penalty had a score of .905. For the iris dataset, the logistic model without penalty is the best choice.
+Comparing the logistic models specifically, the model without implementing any penalty functions seems to perform better with a mean accuracy of .96. The accuracy for the model with penalty was .94. The r2, or the coefficient of determination, scores have a similar trend where the model without penalty had a greater mean r2 score of .936 and the model with penalty had a lesser score of .905. For the iris dataset, the logistic model without penalty is the best choice.
 
 \subsection{New Classifications Using Logistic Regression}
 

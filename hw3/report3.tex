@@ -51,7 +51,7 @@
 
 \begin{abstract}
 \label{log:abstract}
-The Iris dataset contains four specified measurements for each Iris flower in the dataset along with its classification out of three possible Iris flower types. When given a new set of Iris flower measurements outside of the dataset, it is helpful to be able to categorize the classification of Iris. Logistic regression is used because of its main purpose of predicting the probability of categorical outcomes based on historical data. In this case, a linear equation is produced with calculated coefficients and a conditional probability is calculated by using these coefficients in another logistic function. By using the logistic regression model from the scikit-learn Python module, the probability of classifying a new iris record as any of the three classes is produced. Using these probabilities, it is possible to predict which class under which the new flower will fall. In this study, a logistic regression model was created and validated using a binomial logistic regression dataset and then applied to the Iris dataset. Accuracy calculations of the logistic regression model were compared with those of a decision tree model, both stemming from the same dataset. Additionally, the logistic regression model was tested by feeding it two new records of measurements to produce the probability of each of the three Iris flower types. 
+Given a dataset of Iris characteristics, this report explored the development of a predictive model to classify Iris species. Logistic regression was used because of its main purpose of predicting the probability of categorical outcomes based on historical data. To test the procedure of developing the logistic model, we began by replicating the results of a binary example that predicted the probability of a student passing an exam based on the number of hours they studied. Taking those procedures, we applied the process to the Iris dataset. We were able to develop an accurate logistic regression model to classify the data and compared its performance with a decision tree classification model. We found that the logistic regression model had greater accuracy for classifying the data and also was less prone to overfitting. Overall, this model demonstrated its ability to combat overfitting and deal with complexity within the dataset through manipulation of the cost function and penalty terms. 
 \end{abstract}
 
 \section{Introduction}
@@ -124,9 +124,9 @@ Following the same procedure when building the logistic regression model for the
     \caption{Logistic Model Parameters for Iris Classification}
     \end{table}
 
-To evaluate the performance of our logistic regression model, we applied the model to the testing dataset and calculated the accuracy score as well as the r2 score. Additionally, we applied the model on the training dataset again to better understand how closely the model fit to the training data set. To find these values we used the \lstinline{metrics.accuracy_score} and \lstinline{metrics.r2_score} methods from the \lstinline{sklearn} library. 
+To evaluate the performance of our logistic regression model, we applied the model to the testing dataset 1000 times and calculated the accuracy score as well as the r2 score. Each regression model implemented a different cost function. In the SKLearn library, the logistic regression's lstinline{penalty} parameter refers to the added penalty terms in the cost function associated with the model. When the lstinline{penalty} is set to “L2”, which is the default value, the model is adding a penalty term to the cost function to reduce the complexity of the model and reduce overfitting. This term is the square of the magnitude of the coefficients \cite{b4}. When the lstinline{penalty} parameter is set to lstinline{None}, no penalty term is added. We tested these two scenarios by  modifying the lstinline{penalty} parameter of the model. This change was made to see how the model would perform when a penalty was implemented. 
 
-Finally, we wanted to compare the performance of this logistic regression classification model to the performance of the decision tree classification model from the last report. Using the same training and testing datasets used to train the logistic model, we developed a decision tree model. 
+Finally, we wanted to compare the performance of this logistic regression classification model to the performance of the decision tree classification model from the last report [add last report reference]. Using the same training and testing datasets used to train the logistic model, we developed the decision tree model and ran it 1000 times. We used the average accuracy and r2 score here as well to compare the three models. To find these values we used the \lstinline{metrics.accuracy_score} and \lstinline{metrics.r2_score} methods from the \lstinline{sklearn} library. 
 
 \section{Results}
 
@@ -244,7 +244,7 @@ When using the \lstinline{predict_proba} function to create a ranking of the res
 \begin{table}[h!]
 \centering
 \begin{tabular}{ c | c c c }
-Sample & Prob of setosa (0) &	Prob of versicolor (1) & Prob of virginica (2) \\ 
+Sample & P(setosa, 0) &	P(versicolor, 1) & P(virginica, 2) \\ 
 \hline
 129	& 0.000	& 0.189	& 0.811 \\
 42	& 0.988	& 0.012	& 0.000 \\
@@ -284,7 +284,11 @@ It can be seen, using the Prediction row, that the first record is predicted to 
 
 \section{Discussion}
 
+This investigation has shown that logistic regression models can be applied to both simple and complex datasets. We were able to accurately and precisely replicate the Wikipedia binary dataset as well as classify new iris data with high confidence. When increasing the complexity of the model to fit the iris dataset, we expected the addition of the penalty term in the cost function to improve the accuracy of the logistic regression model. However, for this dataset, we found the opposite was true. While adding the L2 penalty reduced the overfitting of the model, it also reduced the accuracy of the predictions when applied to the test dataset. This may indicate that the dataset does not have the complexity to benefit from the added cost term or the dataset is too small where overfitting may not be a significant problem for this model. 
 
+Upon developing the logistic regression and decision tree classification models, we see how some models are better equipped for different applications. Logistic models are less prone to overfitting compared to decision trees which means they are less likely to be skewed by outliers. The results showed there was greater variance in the accuracy among decision tree model evaluation. Additionally, logistic regression models include cost functions that can reduce complexity of the models. This feature makes this method more advantageous than decision trees when applied to more complex datasets where there are more variables or where the variables themselves are more codependent. 
+
+To further this investigation, we should increase the size of the dataset and apply the L2 penalty term when developing the logistic regression model. With a larger dataset, we may be able to see the difference between adding the penalties and without adding any penalties. Additionally, we could also introduce more variables to the dataset and see how the model reacts to more features. 
 
 \begin{thebibliography}{00}
 \bibitem{b1}
@@ -292,7 +296,7 @@ It can be seen, using the Prediction row, that the first record is predicted to 
 \bibitem{b2}
 “Python Machine Learning - Logistic Regression.” https://www.w3schools.com/python/python-ml-logistic-regression.asp (accessed Sep. 23, 2023).
 \bibitem{b3}
-“Logistic regression,” Wikipedia. Aug. 31, 2023. Accessed: Sep. 22, 2023. [Online].
+“Logistic regression,” Wikipedia. Aug. 31, 2023. Accessed: Sep. 22, 2023. [Online]. 
 \bibitem{b4}
 “How is L2 (ridge) penalty calculated in sklearn LogisticRegression function? | Saturn Cloud Blog,” Jul. 10, 2023. https://saturncloud.io/blog/how-is-l2-ridge-penalty-calculated-in-sklearn-logisticregression-function/ (accessed Sep. 23, 2023).
 

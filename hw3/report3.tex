@@ -150,6 +150,7 @@ In comparison to the results stemming from the referenced logistic regression mo
 \label{table:log-odds-table}
 \end{table}
 
+\vspace{10px}
 Finally, the logistic regression curves were compared between the current and referenced models, based on the above tables. It would make sense therefore that these two graphs were also equivalent.
 
 \begin{figure}[h!]
@@ -256,6 +257,7 @@ Sample & P(setosa, 0) &	P(versicolor, 1) & P(virginica, 2) \\
 \label{table:model-comparison-table}
 \end{table}
 
+\vspace{30px}
 The probabilities of setosa, versicolor, and virginica correspond to how likely the Iris flower is actually classified as the class. The higher the probability (closer to 1), the more likely the model categorizes the flower as being that class. For example, the first row shows that the flower has a 0 probability of being classified as setosa, 0.189 as versicolor, and 0.811 as virginica. Therefore it is most likely that the flower is actually Iris virginica. When referring to the original Iris dataset, one can confirm that this is indeed correct, the flower was an Iris virginica. 
 
 The rankings and comparisons with the original Iris dataset seem to further confirm the accuracy of the model. This holds true even in the case of the fifth row, where the probabilities of versicolor and virginica are both fairly close together and near 0.5. The model shows that the probability of the flower being virginica is still higher than versicolor and the actual flower is classified as an Iris virginica. 

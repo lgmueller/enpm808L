@@ -37,7 +37,7 @@
 
 \lstset{style=mystyle}
 
-\title{Investigating Decision Trees}
+\title{Investigating Decision Trees Model for Iris Classification}
 
 \author{
 \IEEEauthorblockN{Lillian Mueller}
@@ -51,7 +51,7 @@
 
 \begin{abstract}
 \label{log:abstract}
-This report explored the development of a decision tree model to classify Iris species. In a decision tree model, the target attribute is chosen and the data is broken down, or segmented, into groups based on information gain and entropy of the dataset or group. We investigated how manipulating the purity measure criterion affects the overall performance of the decision tree. For this dataset, we found that deriving information gain via entropy versus Gini index has largely the same outcome.
+This report explored the development of a decision tree model to classify Iris species. In a decision tree model, the target attribute is chosen and the data is broken down, or segmented, into groups based on information gain and entropy of the dataset or group. We investigated how manipulating the purity measure criterion affects the overall performance of the decision tree. These models are easy to implement and visualize which makes them an effective tool when examining a dataset and optimizing the model accordingly. For this dataset, we found that deriving information gain via entropy versus Gini index has largely the same outcome.
 \end{abstract}
 
 \section{Introduction}
@@ -103,6 +103,7 @@ After the Decision Tree model was fitted to the training data, an accuracy score
 
 The test and train process was repeated again with 20\% of the dataset reserved as test data and the other 80\% as training data. Once again, the accuracy scores of the train and test data were printed and observed. Additional iterations of this process used the same test/train data split (\(\frac{1}{3}\) to \(\frac{2}{3}\)) but this time also varied the \lstinline{max_depth} and \lstinline{criterion} parameters to see their effects on the accuracy of the train and test data.
 
+\vspace{30px}
 \section{Results}
 
 In this investigation, SKLearn\textquotesingle s DecisionTreeClassifier was used to create decision tree models for the Iris dataset. By manipulating the parameters for this class, we were able to develop different trees to classify the Iris data by species. The main parameter we focused on was the “criterion” parameter which allows the developer to change the function by which to measure quality of the splits in the dataset. The first function investigated was the Gini Impurity function. After each split, the method evaluates the likelihood a random sample in the group could be misclassified \cite{b2}. This means that the lower the Gini index, the better the split is as there is a low likelihood a sample will be misclassified. Figure~\ref{fig:dtGI} below shows a depiction of the tree derived from this method.
@@ -134,6 +135,7 @@ max   &   1.0     &   1.000000    & 1.000000
 \label{table:dtGI}
 \end{table}
 
+\vspace{20px}
 The second function we investigated was entropy. This method evaluates the purity of the split by qualifying the disorder within the group. The more variability within the samples, the greater the entropy value for that node. The following is a depiction of the tree derived from this method along with its performance logistics. 
 
 \begin{figure}[h!]
@@ -172,8 +174,7 @@ While the accuracy of each model was very high, the accuracy of the model when a
 \label{fig:dtGI4}
 \end{figure}
 
-\newpage
-
+\vspace{20px}
 
 \begin{table}[h!]
 \centering
@@ -189,9 +190,11 @@ min       &        0.970000     &       0.840000  &   0.678457\\
 75\%      &         1.000000    &        0.960000 &    0.942562\\
 max       &        1.000000     &       1.000000  &   1.000000
 \end{tabular}
-\caption{Statistics for Decision Tree Utilizing Gini Impurity Criterion (4 Levels}
+\caption{Statistics for Decision Tree Utilizing Gini Impurity Criterion (4 Levels)}
 \label{table:dtGI4}
 \end{table}
+
+\vspace{50px}
 
 \begin{figure}[h!]
 \includegraphics[scale=0.3]{iris-entropy-4levels.pdf}
@@ -199,6 +202,8 @@ max       &        1.000000     &       1.000000  &   1.000000
 \caption{Decision Tree Utilizing Entropy Criterion with 4 Levels}
 \label{fig:dtEn4}
 \end{figure}
+
+\vspace{20px}
 
 \begin{table}[h!]
 \centering
@@ -218,11 +223,10 @@ max       &        1.000000     &       1.000000   &  1.000000
 \label{table:dtEn4}
 \end{table}
 
+\vspace{100px}
 Regarding the trees developed using Gini impurity, the accuracy of the overall model increased, where the accuracy increased from 0.9451 to 0.9455 and the r2 score increased from 0.9158 to 0.9167. While the training data accuracy decreased from 1.0 to 0.9929, this demonstrates why analysts should be wary of overfitting their model when utilizing this technique. For the dataset, restricting the model resulted in greater accuracy even though the accuracy of the model when applied to the training dataset decreased.
 
 On the other hand, the trees developed using entropy marginally decreased in all aspects. For this dataset, constraining the tree did not improve the efficacy of the decision tree model.
-
-\newpage
 
 \section{Discussion}
 

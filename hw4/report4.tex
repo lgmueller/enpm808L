@@ -62,7 +62,7 @@ Cross validation is a method that can be used to determine which classification 
 
 The Python \lstinline{sklearn} library is used to perform cross validation in section \ref{sec:methodology} to conclude the optimal model between decision tree and logistic regression for the Iris dataset. The results are outlined in section \ref{sec:results}. The importance of this investigation is in section \ref{sec:discussion}. 
 
-\vspace{30pxs}
+\vspace{40px}
 
 \section{Methodology}
 \label{sec:methodology}
@@ -155,10 +155,10 @@ k & Measure & Logistic Regression & Decision Tree \\
 \label{table:MultiFoldCV}
 \end{table}
 
-For all k-values, the logistic tree models consistently hase greater accuracy than the decision tree model. Between k=3 and k=5, the accuracy of both the models did not change. When k=7, the accuracy of both models decreased. This could be because the folds do not have the same amount of data, as 150 data points do not divide evenly between 7 groups, also causing more variance within the accuracy of the folds. When k=50, the accuracy for the decision tree decreases which indicates underfitting of the data, the number of data points in each fold must be too low to effectively train a decision tree model. The standard deviation also greatly increased for both models when k=50. When k=10 and 15, the accuracy of both models increases slightly compared to k=3 and k=5. Compared to k=50, the models (evaluated where k=10, 15) have much lower standard deviations. The methods with k=10 and 15 have the highest accuracies and relatively low standard deviations which indicates that 10-15 folds is the optimal number of folds to validate this dataset.
+For all k-values, the logistic tree models consistently has greater accuracy than the decision tree model. Between k=3 and k=5, the accuracy of both the models did not change. When k=7, the accuracy of both models decreased. This could be because the folds do not have the same amount of data, as 150 data points do not divide evenly between 7 groups, also causing more variance within the accuracy of the folds. When k=50, the accuracy for the decision tree decreases which indicates underfitting of the data, the number of data points in each fold must be too low to effectively train a decision tree model. The standard deviation also greatly increased for both models when k=50. When k=10 and 15, the accuracy of both models increases slightly compared to k=3 and k=5. Compared to k=50, the models (evaluated where k=10, 15) have much lower standard deviations. The methods with k=10 and 15 have the highest accuracies and relatively low standard deviations which indicates that 10-15 folds is the optimal number of folds to validate this dataset.
 
 \vspace{60px}
-Evaluating the method at k=10 and 15, we concluded that k=14 would be the optimal k value for this validation procedure as it produced high accuracy and low variance indicating it was unbiased and balanced. 
+Evaluating the method at k=10 through 15, we concluded that k=14 would be the optimal k value for this validation procedure as it produced high accuracy and low variance indicating it was unbiased and balanced. 
 
 \begin{table}[h!]
     \centering

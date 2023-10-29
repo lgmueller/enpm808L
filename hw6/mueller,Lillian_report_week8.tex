@@ -49,6 +49,7 @@
 \begin{abstract}
 \label{log:abstract}
 \end{abstract}
+Confusion matrices are effective evaluators of classification models. This method allows analysts to predict an expected profit from the model which considers the cost of incorrect predictions and the benefit of correct predictions. Using the Iris dataset, the performance of the Decision Tree Model, Logistic Regression Mode, and the K-Nearest Neighbor Model are examined via confusion matrices and expected profit. By doing so, the K-Nearest Neighbor Model proves most effective in maximizing profit and potentially minimizing customer complaints. These results can also be confirmed through past reports using cross validation and comparing accuracy, precision, and recall scores. Overall, a confusion matrix has the capacity to qualify the performance of a classification model and proves to be an effective way to rank them. 
 
 \section{Introduction}
 
@@ -56,32 +57,34 @@ Predicting the classification of Iris flowers has been proven possible time and 
 
 Confusion matrices display outcomes from a model and sort those outcomes by predicted and actual values \cite{b4}. An analyst can then visually see how many outcomes from the model were classified correctly, which are referred to as true positives (TP) and true negatives (TN). The analyst can also see how many outcomes were classified incorrectly as well as which classification the point was confused with; these are referred to as false positives (FP) and false negatives (FN). Using this matrix, expected rates of the correct classifications versus the incorrect classifications can be found to calculate the overall expected value of the model \cite{b5}. Replicating the methodology to find each expected value for the models will aid in determining which model is most effective at maximizing profit. 
 
-The methodology followed to determine the most cost effective model is described in Section ~\ref{sec:methodology}. Results are discussed in Section ~\ref{sec:results}. And finally lasting comments and future research can be found in Section ~\ref{sec:discussion}.
+\vspace{10px}
+
+The methodology followed to determine the most cost effective model is described in Section \ref{sec:methodology}. Results are discussed in Section \ref{sec:results}. And finally lasting comments and future research can be found in Section \ref{sec:discussion}.
 
 
 \section{Methodology}
 \label{sec:methodology}
 
-This investigation entails using various classes from the library \lstinline{scikitlearn}. To develop the models: the \lstinline{DecisionTreeClassifier} class from the \lstinline{tree} module, the \lstinline{LogisticRegression} class from the \lstinline{linear_model} module, and the \lstinline{KNeighbors} function from the \lstinline{neighbors} module. Each was used to develop the decision tree model, the logistic regression model, and the k-nearest neighbors model respectively. To develop the confusion matrices and accuracy/precision scores of each model ,  \lstinline{sklearn}'s \lstinline{metrics} module was used. Other Python libraries were used along the was as well to help handle the data which includes \lstinline{matplotlib.pyplot}, \lstinline{pandas}, and \lstinline{numpy}. 
+This investigation entails using various classes from the library \lstinline{scikitlearn}. To develop the models, the following classes were used: the \lstinline{DecisionTreeClassifier} class from the \lstinline{tree} module, the \lstinline{LogisticRegression} class from the \lstinline{linear_model} module, and the \lstinline{KNeighbors} function from the \lstinline{neighbors} module. Each was used to develop the decision tree model, the logistic regression model, and the k-nearest neighbors model respectively. To develop the confusion matrices and accuracy/precision scores of each model ,  \lstinline{sklearn}'s \lstinline{metrics} module was used. Other Python libraries were used along the was as well to help handle the data which includes \lstinline{matplotlib.pyplot}, \lstinline{pandas}, and \lstinline{numpy}. 
 
 First, the Iris dataset was loaded as an \lstinline{sklearn.utils.Bunch} object called \lstinline{iris_data} via the \lstinline{load_iris()} function. This object is similar to a Python dictionary. To make the data easier to read, it was transformed into the \lstinline{df_iris} dataframe, where the data parameter was set as the \lstinline{data} attribute of the dataset and the columns parameter as the \lstinline{feature_names} attribute. A new column called “class” was added to this dataframe which contains the \lstinline{target} variable of the Iris dataset; this is the class of the Iris plant - setosa, versicolor, or virginica. Since the \lstinline{target} attribute contains an array with values from 0-2, the \lstinline{replace} function was used to map these numerical values to their corresponding classifications: setosa for \(0\), versicolor for \(1\), and virginica for \(2\). 
 
 After the Iris dataset was loaded in and processed, it was split into a train group and test group using the \lstinline{test_train_split} function, with 2/3 of the data as the train group and the remainder as the test group. 
 
-Next, the models were developed. For each model, similar methods were used as describe in previous studies \cite{b1}-\cite{b3}. For context, the decision tree model was developed with the Gini impurity criterion, the logistic regression model was developed without any penalty, and the KNN model was developed using k=10 and the Euclidean distance metric. These were determined to be the most effective version of each model in their respective investigation. Additionally, all models were trained using the same training subset of the dataset.
+Next, the models were developed. For each model, similar methods were used as described in previous studies \cite{b1}-\cite{b3}. For context, the decision tree model was developed with the Gini impurity criterion, the logistic regression model was developed without any penalty, and the KNN model was developed using k=10 and the Euclidean distance metric. These were determined to be the most effective version of each model in their respective investigation. Additionally, all models were trained using the same training subset of the dataset.
 
 After creating these models, they were applied to the testing subset of the dataset. The  classification predictions were then compared to the actual testing data classifications. A confusion matrix was created for each model using the \lstinline{confusion_matrix()} method from the \lstinline{metrics} module. Using the \lstinline{ConfusionMatrixDisplay} method, also from \lstinline{metrics}, a depiction of the matrix was developed. To generate further evaluation measures, the models' accuracy, precision, and recall scores were calculated using \lstinline{accuracy_score()}, \lstinline{precision_score()}, and \lstinline{recall_score()} respectively, all methods from the \lstinline{metrics} module. These values can also be calculated using the \lstinline{classification_report} method which also calculates the f-score (measure of accuracy using the recall and precision) and weighted and macro average accuracies. 
 
-Once the confusion matrix and general metrics were calculated for each model, the expected value for each model could be calculated. The expected value is calculated by summing the products of each error rate multiplied by the corresponding cost or benefit. Error rates are calculated by dividing the outcomes counts from the confusion matrix by the number of total outcomes. The confusion matrix consists of counts of true positives, true negatives, false positives, and false negatives. The following diagram depicts this process. 
+Once the confusion matrix and general metrics were calculated for each model, the expected value for each model could be calculated. The expected value is calculated by summing the products of each error rate multiplied by the corresponding cost or benefit. Error rates are calculated by dividing the outcome counts from the confusion matrix by the number of total outcomes. The confusion matrix consists of counts of true positives, true negatives, false positives, and false negatives. The following diagram depicts this process. 
 
 \begin{figure}[h!]
 \includegraphics[scale=1]{expectedValDiagram.png}
 \centering
-\caption{Expected Value Calculation Diagram}
+\caption{Expected Value Calculation Diagram \cite{b5}}
 \label{fig:expectedValDiagram}
 \end{figure}
 
-For this case, since there are 3 classifications, setosa, virginica, and versicolor, the diagrams will correspond to table \ref{table:cm-meaning}.
+For this case, since there are 3 classifications, setosa, virginica, and versicolor, the diagrams will correspond to Table \ref{table:cm-meaning}.
 
 \begin{table}[h!]
 \centering
@@ -102,7 +105,7 @@ For this case, since there are 3 classifications, setosa, virginica, and versico
 \label{table:cm-meaning}
 \end{table}
 
-To start this calculation, the cost/benefit information was developed. For correct classifications, I assigned a benefit of 1 and for each incorrect classification, I assigned a cost of -1. The final cost/benefit matrix is shown in Table \ref{table:costmatrix}.
+To start this calculation, the cost/benefit information was developed. For correct classifications, a value of 1 was assigned as a benefit and for each incorrect classification, a cost of -1. The final cost/benefit matrix is shown in Table \ref{table:costmatrix}.
 
 \begin{table}[h!]
 \centering
@@ -118,14 +121,16 @@ Actual: 0 & 1 & -1 & -1 \\
 \label{table:costmatrix}
 \end{table}
 
+\vspace{10px}
 In order to find the expected rates of each outcome, each value in the confusion matrix was divided by the sum of the confusion matrix. Each rate is then multiplied by the corresponding value in the cost/benefit matrix. Finally, to find the expected profit for the model, all values are summed. 
 
+\vspace*{30px}
 \section{Results}
 \label{sec:results}
 
 \subsection{Confusion Matrices}
 
-After the development of each model, a confusion matrix was created to better understand the performance of the model on the testing dataset. Figures \ref{fig:cm-dtree}, \ref{fig:cm-logreg}, and \ref{fig:cm-knn} show the matrices for the decision tree model, the logistic regression model, and the KNN model respectively. 
+After the development of each model, a confusion matrix was created to better understand the performance of the model on the testing dataset along with its classification report. Figures \ref{fig:cm-dtree}, \ref{fig:cm-logreg}, and \ref{fig:cm-knn} show the matrices for the decision tree model, the logistic regression model, and the KNN model respectively and Tables \ref{table:classReport-dtree}, \ref{table:classReport-logreg}, and \ref{table:classReport-knn} display the corresponding classification reports. 
 
 \begin{figure}[h!]
 \includegraphics[scale=.5]{dtree_cm.png}
@@ -134,12 +139,46 @@ After the development of each model, a confusion matrix was created to better un
 \label{fig:cm-dtree}
 \end{figure}
 
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c c }
+& precision   & recall & f1-score  & support \\
+\hline
+0   &    1.00  &    1.00   &   1.00  &      18 \\
+1   &    0.83  &    0.94   &   0.88  &      16 \\
+2   &    0.93  &    0.81   &   0.87  &      16 \\
+\hline
+accuracy    &     -     &     -    &    0.92    &    50 \\
+macro avg    &   0.92   &   0.92   &   0.92    &    50 \\
+weighted avg   &    0.92  &    0.92   &   0.92   &     50 \\
+\end{tabular}
+\caption{Classification Report for Decision Tree Model}
+\label{table:classReport-dtree}
+\end{table}
+
 \begin{figure}[h!]
 \includegraphics[scale=.5]{logR_cm.png}
 \centering
 \caption{Confusion Matrix for Logistic Regression Model}
 \label{fig:cm-logreg}
 \end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c c }
+& precision   & recall & f1-score  & support \\
+\hline
+0   &    1.00   &   1.00   &   1.00   &     18\\
+1   &    0.94   &   0.94   &   0.94   &     16\\
+2   &    0.94   &   0.94   &   0.94   &     16\\
+\hline
+    accuracy   &           &         &    0.96    &    50\\
+   macro avg   &    0.96   &   0.96  &    0.96    &    50\\
+weighted avg   &    0.96   &   0.96  &    0.96    &    50\\
+\end{tabular}
+\caption{Classification Report for Logistic Regression Model}
+\label{table:classReport-logreg}
+\end{table}
 
 \begin{figure}[h!]
 \includegraphics[scale=.5]{knn_cm.png}
@@ -148,7 +187,26 @@ After the development of each model, a confusion matrix was created to better un
 \label{fig:cm-knn}
 \end{figure}
 
-Looking at the matrices, all the models are fairly accurate at classifying each iris flower. Each model was tested with 50 data entries, since the data was trained on 2/3 of the total dataset. The numbers in each square represent the number of outcomes for each event. These events correspond to \ref{table:cm-meaning}. From these matrices alone, an analyst may conclude that the KNN model has the best performance as its associated confusion matrix shows the least amount of misclassified events. 
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c c }
+& precision   & recall & f1-score  & support \\
+\hline
+0    &   1.00   &   1.00  &    1.00   &     18\\
+1    &   0.94   &   1.00  &    0.97   &     16\\
+2    &   1.00   &   0.94  &    0.97   &     16\\
+\hline
+    accuracy    &   -      &   -      &   0.98    &    50\\
+   macro avg    &   0.98   &   0.98   &   0.98    &    50\\
+weighted avg    &   0.98   &   0.98   &   0.98    &    50\\
+\end{tabular}
+\caption{Classification Report for KNN Model}
+\label{table:classReport-knn}
+\end{table}
+
+\vspace{80px}
+
+Looking at the matrices, all the models are fairly accurate at classifying each iris flower. Each model was tested with 50 data entries, since the models were trained on 2/3 of the total dataset. The numbers in each square represent the number of outcomes for each event. These events correspond to Table \ref{table:cm-meaning}. From these matrices alone, an analyst may conclude that the KNN model has the best performance as its associated confusion matrix shows the least amount of misclassified events. Additionally, looking at the classification reports from each model, the KNN model had the greatest precision, accuracy, and recall scores of all the models. From the classification reports and confusion matrices, it seems all the models struggle to accurately decipher between versicolor and virginica. 
 
 \subsection{Evaluating Expected Profit}
 
@@ -167,13 +225,15 @@ KNN & 0.96
 \label{table:exVals}
 \end{table}
 
-An analyst can conclude that the K-Nearest Neighbor model will yield the most profit and therefore maximize profit. This makes sense as flowers, and organisms in general, are classified by similarities and KNN models model similarity. 
+An analyst can conclude that the K-Nearest Neighbor model will yield the most profit and therefore maximize profit. This makes sense as flowers, and organisms in general, are classified by similarities and KNN models model similarity. An analyst can also conclude that the Decision Tree Model is the worst model of the three for this dataset.
 
 These results also reinforce past investigations. When using cross validation to compare the decision tree, logistic regression, and KNN models, the KNN model was also found to be the most stable for the iris dataset \cite{b3}. 
 
 \section{Discussion}
 \label{sec:discussion}
+The KNN model proves to be best model for the iris dataset of the models investigated. Using cross validation, confusion matrices and expected profit, and by comparing accuracy scores, all methods seem to point to the K-Nearest Neighbor model. As expected, each validation method reinforces the other. This is important to note as analysts should use more than one validation method to ensure a model is best fit for a dataset. Here, by calculating the expected profit, the KNN model may be expected to have greater return on investment as its accuracy and precision is quantified into actual costs and benefits, however, since this was only performed once, the analyst cannot confirm the performance of the model using a different data split. The cross validation method tested how stable the KNN model was and how it may react differently when trained and tested with different data splits. In this method, the analyst has no way of weighing whether the accuracy outweighs the impact of incorrect predictions. Each method has its flaws and advantages and using more than a single validation method allows for better understanding of the model and its capacity.
 
+In the future, when using confusion matrices and expected profit methods to evaluate the performance of a classification model, the analyst could increase the number of times the method is run and use a different training and testing data split. As the training sets may not have the exact same proportion of classes, the overall confusion matrix could be different and prove one model yields greater expected profit over another when using specific training datasets. In addition to evaluating the expected profit across multiple models, an analyst could experiment with changing the test size when splitting the data into training and testing sets. In this study, only 1/3 of the data was used as a testing set, meaning only 50 points were used when creating the confusion matrices. This is a fairly small number, so finding the “sweet spot” for the training and testing set ratio may decrease the variance of the confusion matrix and subsequent expected profit across different testing sets. 
 
 \begin{thebibliography}{00}
 \bibitem{b1} L. Mueller and R. Hong, “Investigating Decision Trees”.

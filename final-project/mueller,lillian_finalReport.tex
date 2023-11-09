@@ -1,0 +1,97 @@
+\documentclass[journal]{IEEEtran}
+%\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% listings package for code blocks
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{parskip}
+
+\begin{document}
+
+% overfull \hbox .. too wide 
+\setlength{\emergencystretch}{12pt}
+%\setlength{\parskip}{0pt} % 1ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{10pt}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,      
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},           
+    captionpos=b,
+}
+
+\lstset{style=mystyle}
+
+\title{Developing Classification Model for Diabetes from Health Indicators}
+
+\author{
+\IEEEauthorblockN{Lillian Mueller}
+\IEEEauthorblockA{lmuelle1@umd.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+\label{log:abstract}
+\end{abstract}
+
+\section{Introduction}
+
+\section{Methodology}
+
+\begin{lstlisting}[language=Python, caption=Libraries used for this assignment.]
+\end{lstlisting}
+
+\section{Results}
+
+\begin{figure}[h!]
+\includegraphics[scale=0.5]{fig.pdf}
+\centering
+\caption{Decision Tree Utilizing Gini Impurity Criterion}
+\label{fig:dtGI}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ c | c c c }
+    Description & Train Data Accuracy & Test Data Accuracy & r2 Score \\ 
+\hline
+count & 1000.0    & 1000 & 1000  \\
+mean  &    1.0    &    0.945100   &  0.915793 \\
+std   &    0.0    &    0.028636   &  0.044914 \\
+min   &    1.0    &    0.840000   &  0.750000 \\
+25\%  &     1.0   &     0.920000  &   0.887892 \\
+50\%  &     1.0   &     0.940000  &   0.916574 \\
+75\%  &     1.0   &     0.960000  &   0.942824 \\
+max   &   1.0     &   1.000000    & 1.000000
+\end{tabular}
+\caption{Statistics for Decision Tree utilizing Gini Impurity Criterion}
+\label{table:dtGI}
+\end{table}
+
+
+\section{Discussion}
+
+
+\begin{thebibliography}{00}
+\bibitem{b1}
+\bibitem{b2}
+
+\end{thebibliography}
+
+\end{document}

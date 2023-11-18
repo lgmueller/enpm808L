@@ -37,7 +37,7 @@
 
 \lstset{style=mystyle}
 
-\title{Comparing Classifications Models Against the Naïve Bayes Classifier}
+\title{Comparing Classifications Models Against the Naïve Bayes Classifier and Linear Discriminant Analysis Model}
 
 \author{
 \IEEEauthorblockN{Lillian Mueller}
@@ -112,6 +112,8 @@ Looking at these statistics alone, one may conclude that the LDA model is the be
 
 Here, again the analyst can conclude the same rankings as before. A perfect model would have an AUC of 1. Each model displayed has an AUC of .8 or higher which means each model has some merit and is efficient at being a predictor of the iris dataset. The best model, with an AUC of .985 is the LDA model, followed by the KNN model with an AUC of .955. The third, fourth, and fifth best model were the decision tree model (AUC=.91), naïve bayes classifier (AUC=.881), and finally the logistic regression model (AUC=.823) respectively. If an analyst were using the Naïve Bayes model as a benchmark, the logistic regression model does not make the cut, whereas the decision tree and k-nearest neighbor are better than the benchmark in this case. 
 
+\vspace{40px}
+
 As the previous evaluation methods could have bias due to the training data and testing data split, cross validation was run on each model to determine a more holistic calculation of the accuracy. Table \ref{table:crossval}. 
 
 \begin{table}[h!]
@@ -146,8 +148,6 @@ These rankings are more reliable than previous as the cross-validation method is
 Overall, it was expected that the models would be proven effective. The naïve bayes classifier used as the benchmark in this investigation was deemed less than the decision tree, KNN, LDA, and logistic regression models. The analyst can conclude that the LDA model was the best fit for this dataset as it was the best performing model in all evaluation methods. However, what was unexpected was the vast difference between the evaluation methods. When using the AUC of the ROC curves as a metric to rank the classifiers, it seemed the logistic regression model was the worst of the models as its AUC was less than that of the naïve bayes classifier model. After evaluating the models via cross-validation, it became clear that the logistic regression model was far from being less effective than the naïve bayes classifier. The logistic regression model was the most accurate of the models. This demonstrates how important it is to evaluate the performance of any model through more than one method. By only using the ROC curve analysis and not include the LDA model, the overall better performing logistic regression model would have been overlooked and the KNN model may have been deemed the best model for the dataset. 
 
 In both evaluation cases however, there was a model that rose to the top: the LDA. This investigation demonstrates the LDA model is the best fit for the data. It had the greatest AUC value and the greatest average accuracy. In the future, it is worth investigating why the cross-validation accuracy of the LDA and the logistic regression model were equal when the AUC values of each model were so different. It is clear that the AUC evaluation relies greatly on the training and testing dataset. Examining how to reduce this bias would greatly benefit future comparisons using this method so the analyst has a better scope of the model's performance when it comes to dealing with true positives versus false positives. 
-
-\vspace{30px}
 
 \begin{thebibliography}{00}
 \bibitem{b1}{F. Provost and T. Fawcett, Data Science for Business: What You Need to Know About Data Mining and Data Analytic Thinking, First edition (2005). }

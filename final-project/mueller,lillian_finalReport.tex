@@ -56,7 +56,7 @@ Diabetes is a prevalent metabolic condition that affect millions of people globa
 
 Characterized by elevated blood sugar levels, diabetes encompasses type 1, type 2, and gestational diabetes. Type 1 diabetes occurs when the body is unable to make insulin, which is a hormone that regulates glucose levels in the blood. Type 2 diabetes is the most common form of diabetes; an individual with this type cannot properly utilize insulin. Gestational diabetes can occur during pregnancy but increases the mother's chance of getting type 2 diabetes later in life \cite{b1}. Type 2 is the most common and can develop at any age, it can also be prevented. Prediabetes is a stepping stone that could be used as an indicator to being at risk of type 2 diabetes. Having prediabetes means your blood glucose levels are higher than normal \cite{b1}. Being able to identify this condition is crucial for intervention strategies such as lifestyle modifications in the form of weight loss and exercise \cite{b2}. 
 
-This investigation explored the predictive capabilities of various classification models in determining the likelihood of an individual having diabetes, prediabetes, or no diabetes at all. The models under scrutiny include the decision tree, logistic regression, k-nearest neighbor (KNN), naïve Bayes classifier, and linear discriminant analysis (LDA). Each model offers unique methodologies and algorithms that may exhibit varying efficacy in predicting diabetes or prediabetes based on health indicators.
+This investigation explored the predictive capabilities of various classification models in determining whether an individual has diabetes, prediabetes, or no diabetes at all. The models under scrutiny include the decision tree, logistic regression, k-nearest neighbor (KNN), naïve Bayes classifier, and linear discriminant analysis (LDA). Each model offers unique methodologies and algorithms that may exhibit varying efficacy in predicting diabetes or prediabetes based on health indicators.
 
 The investigation utilizes a comprehensive dataset sourced from Kaggle \cite{b3}. This dataset consists of health indicators such as demographic information, physiological measures, and lifestyle attributes. These attributes include age, body mass index (BMI), blood pressure, insulin levels, blood pressure, heart conditions, diet, exercise, and more. By examining these models against the dataset, this study seeks to provide insights into the most effective predictive framework for identifying individuals at risk or already affected by these metabolic conditions.
 
@@ -69,7 +69,7 @@ This investigation entails using various classes from the library \lstinline{sci
 
 \subsection{Diabetes Dataset Preprocessing}
 
-The dataset in this investigation was taken from Kaggle [3]. The data was downloaded from the website as a CSV file, which is a file type where the data is separated by commas. The \lstinline{pandas} library has methods that allows the analyst to directly read the data from a CSV file into a dataframe. Once the data was translated into the dataframe, each column was examined and cleaned to contain only numeric values and scaled. The target classification column contained the distinction of whether an individual had diabetes, prediabetes, or no diabetes. After encoding these classifications, 0 represented no diabetes, 1 represented prediabetes, and 2 represented diabetes. All other columns in the dataframe represented attributes that are used as features in the models to predict these classifications. The columns were all altered to only contain numerical values. The final values for each attribute are as follows: 
+The dataset in this investigation was taken from Kaggle [3]. The data was downloaded from the website as a CSV file, which is a file type where the data is separated by commas. The \lstinline{pandas} library has methods that allows the analyst to directly read the data from a CSV file into a dataframe. Once the data was translated into the dataframe, each column was examined and cleaned to contain only numeric values and was scaled. The target classification column contained the distinction of whether an individual had diabetes, prediabetes, or no diabetes. After encoding these classifications, 0 represented no diabetes, 1 represented prediabetes, and 2 represented diabetes. All other columns in the dataframe represented attributes that are used as features in the models to predict these classifications. The columns were all altered to only contain numerical values. The final values for each attribute are as follows: 
 
 \begin{enumerate}
 \item High Blood Pressure (HighBP)
@@ -141,6 +141,7 @@ The dataset in this investigation was taken from Kaggle [3]. The data was downlo
     \item 4 = fair 
     \item 5 = poor 
     \end{itemize}
+\vspace{10px}
 \item  Number of Days Mental Health was poor within past 30 days (MentHlth)
 \begin{itemize}
     \item 1-30
@@ -198,15 +199,15 @@ The dataset in this investigation was taken from Kaggle [3]. The data was downlo
     \end{itemize}
 \end{enumerate}
 
-Since there were 21 total features in the dataset, to decrease complexity and potentially increase accuracy of the models, attributes not directly related with the individuals' physical health and subjective attributes were omitted such as education, income, health care coverage, general health rating, and estimated number of days of poor mental/physical health. Overall, the dataset breakdown revealed that 84.2\% of the data represents no diabetes, 1.8\% of the dataset is classified as having prediabetes, and the remaining 14\% of the data has diabetes. 
+Since there were 21 total features in the dataset, to decrease complexity and potentially increase accuracy of the models, attributes not directly related with the individuals' physical health and subjective attributes were omitted such as education, income, health care coverage, general health rating, and estimated number of days of poor mental/physical health. Overall, the dataset breakdown revealed that 84.2\% of the data represented no diabetes, 1.8\% of the dataset is classified as having prediabetes, and the remaining 14\% of the data had diabetes. 
 
-After the diabetes dataset processed, it was split into a train group and test group using the \lstinline{model_selection.test_train_split()} function, with 2/3 of the data as the training group and the remainder as the testing group. For this dataset, since the classifications are not even, the test sets were stratified with respect to the diabetes classifications to attempt to split dataset with uniform proportions. Each model described in the following section was trained and tested using these training and testing data subsets. 
+After the diabetes dataset was processed, it was split into a train group and test group using the \lstinline{model_selection.test_train_split()} function, with 2/3 of the data as the training group and the remainder as the testing group. For this dataset, since the classifications are not even, the test sets were stratified with respect to the diabetes classifications to attempt to split dataset with uniform proportions. Each model described in the following section was trained and tested using these training and testing data subsets. 
 
 \subsection{Model Development}
 
-Next, the models were developed and each model had to be tuned to the dataset. The first model to be trained was the decision tree model. To tune this model, the entropy and Gini index criterion were tested. Due to the large number of features, the decision trees were also constrained by varying maximum depths. Following the procedures outline in a previous study titled “Investigating Decision Trees”, the best fitting decision tree model was found to be utilizing the Gini index as the purity measurement and no constraints on the maximum depth of the tree \cite{b4}.
+Next, the models were developed and each model was tuned to the dataset. The first model to be trained was the decision tree model. To tune this model, the entropy and Gini index criterion were tested. Due to the large number of features, the decision trees were also constrained by varying maximum depths. Following the procedures outlined in a previous study titled “Investigating Decision Trees”, the best fitting decision tree model was found to be utilizing the Gini index as the purity measurement and no constraints on the maximum depth of the tree \cite{b4}.
 
-Since this is a multiclass dataset, \lstinline{SKLearn} has various solver algorithms to use in the optimization problem used in the logistic regression model. Those include Newton's method, the Stochastic average gradient (SAG), a variant of the SAG (SAGA), and finally the Limited-memory Broyden-Fletcher-Goldfarb-Shanno algorithm. For this application, only SAG and SAGA were investigated due to their ability to deal with large, multiclass datasets \cite{b5}. Both algorithms were tested with the dataset using no penalty and the l2 penalty. These penalties are further described in a previous study titled, “Iris Classification Using Logistic Regression” \cite{b6}. Upon running these variations of the logistic regression model, the model using SAGA solver without any penalties proved to have the greatest accuracy.  
+Since this is a multiclass dataset, \lstinline{SKLearn} has various solver algorithms to use in the optimization problem used in the logistic regression model. Those include Newton's method, the Stochastic average gradient (SAG), a variant of the SAG the Stochastic average gradient descent (SAGA), and finally the Limited-memory Broyden-Fletcher-Goldfarb-Shanno algorithm. For this application, only SAG and SAGA were investigated due to their ability to deal with large, multiclass datasets \cite{b5}. Both algorithms were tested with the dataset using no penalty and the l2 penalty. These penalties are further described in a previous study titled, “Iris Classification Using Logistic Regression” \cite{b6}. Upon running these variations of the logistic regression model, the model using SAGA solver without any penalties proved to have the greatest accuracy.  
 
 To develop the k-nearest neighbor (KNN) model, multiple parameters were tested to tune the model to the diabetes dataset. These parameters included modifying the number of neighbors, the distance metrics used to determine similarity, and simply testing the model using uniform weights. The distance metrics in question were Euclidean, Manhattan, and cosine. Procedures to develop these methods are defined in “Evaluating the Performance of K-Nearest Neighbors Classification” \cite{b7}. The optimal parameters proved to be k = 25 using the Euclidean distance metric.
 
@@ -220,7 +221,7 @@ After determining the best version of each model for the diabetes dataset, they 
 
 To compare and rank the models, a ROC curve was created for each model to find the models AUC (area under the curve). This value is a scalar value that allows the user to evaluate the models' performance with respect to false positives versus true positives and provides an easy way for the analyst to rank the classifiers. The methodology to develop the curves for each multiclass model is similar to the methodology explained in previous reports \cite{b9}, \cite{b11}. 
 
-Finally, to further validate and compare these models, each model was evaluated using cross-validation. Using 10 folds and the methodology found in a previous investigation, the mean accuracy and the standard deviation of all the accuracies from each fold were found and compared \cite{b12}. Additionally, a similar method was used to perform cross validation to find the general precision score when classifying prediabetes. The \lstinline{cross_val_score()} function was used here as well, expect rather than specifying the scoring as \lstinline{'accuracy'}, the scoring was based on \lstinline{'precision'}. Additionally, to isolate this classification in a multiclass dataset, the target array was binarized to highlight only prediabetes as a positive classification. 
+Finally, to further validate and compare these models, each model was evaluated using cross-validation. Using 10 folds and the methodology found in a previous investigation, the mean accuracy and the standard deviation of all the accuracies from each fold were found and compared \cite{b12}. Additionally, a similar method was used to perform cross validation to find the general precision score when classifying prediabetes. The \lstinline{cross_val_score()} function was used here as well, expect rather than specifying the scoring as \lstinline{'accuracy'}, the scoring was based on \lstinline{'precision'}. To isolate this classification in a multiclass dataset, the target array was binarized to highlight only prediabetes as a positive classification. 
 
 \section{Results}
 \label{sec:results}
@@ -236,7 +237,7 @@ To reiterate, the best fit variation of the decision tree, logistic regression, 
 
 Each specialized model was chosen based on accuracy derived from cross-validation and the individual classification precision when compared to other variations of the same model. It is important to note that in many cases, the models are unable to predict prediabetes. Upon observations, if a version of a model is able to predict some prediabetes classification at some accuracy, the overall model accuracy is reduced greatly. In this investigation, the model with the greatest accuracy and some competence at classifying prediabetes is chosen. If the model was unable to classify any prediabetes, the model with the greatest overall accuracy was chosen. The reason for this discrepancy is most likely due to the unbalanced dataset. Only about 2\% of the dataset can be classified as prediabetes.
  
-With regards to the naïve bayes, both the Gaussian and Bernoulli versions of the naïve Bayes classifier had their own trade-offs. While the Gaussian naïve Bayes classifier was able to classify some prediabetes correctly, the overall accuracy was very poor in comparison. On the other hand, the Bernoulli naïve Bayes classifier had a very high overall accuracy but was unable to classify prediabetes. Table \ref{table:accuracy} shows the discrepancies between the models. 
+With regards to the naïve Bayes, both the Gaussian and Bernoulli versions of the naïve Bayes classifier had their own trade-offs. While the Gaussian naïve Bayes classifier was able to classify some prediabetes correctly, the overall accuracy was very poor in comparison. On the other hand, the Bernoulli naïve Bayes classifier had a very high overall accuracy but was unable to classify prediabetes. Table \ref{table:accuracy} shows the discrepancies between the models. 
 
 
 \begin{table}[h!]
@@ -257,18 +258,18 @@ LDA	& 0.814 & 0.830 & 0. & 0.497 \\
 \end{table}
 
 According to these results, the logistic regression, KNN, and LDA models all have the greatest overall accuracy of 81\%. The Gaussian naïve Bayes has the greatest precision when predicting no diabetes (88\%) and prediabetes (1.8\%), and the logistic regression model has the greatest precision when predicting diabetes at 52\%.
-    
-\vspace{20px}
 
 \subsection{Individual Classification Model Confusion Matrices}
 
 With the chosen classifiers to compare, the confusion matrix for each model was developed as seen in Figures \ref{fig:dtree} to \ref{fig:lda}. Confusion matrices enable the analyst to visually see the predictions made by each individual model and compare the predictions against the true classifications.
 
+\pagebreak
+
 \begin{figure}[h!]
-\includegraphics[scale=0.5]{Decision Tree_cm.png}
-\centering
-\caption{Decision Tree Utilizing Gini Impurity Criterion Confusion Matrix}
-\label{fig:dtree}
+    \includegraphics[scale=0.5]{Decision Tree_cm.png}
+    \centering
+    \caption{Decision Tree Utilizing Gini Impurity Criterion Confusion Matrix}
+    \label{fig:dtree}
 \end{figure}
 
 \begin{figure}[h!]
@@ -285,14 +286,14 @@ With the chosen classifiers to compare, the confusion matrix for each model was 
     \label{fig:knn}
     \end{figure}
 
+\pagebreak
+
 \begin{figure}[h!]
     \includegraphics[scale=0.5]{Gaussian Naive Bayes_cm.png}
     \centering
     \caption{Gaussian Naive Bayes Confusion Matrix}
     \label{fig:gaussnb}
     \end{figure}
-
-\clearpage
 
 \begin{figure}[h!]
     \includegraphics[scale=0.5]{Bernoulli Naive Bayes_cm.png}
@@ -313,9 +314,7 @@ From these results, the decision tree and Gaussian naïve Bayes are the only mod
 
 \subsection{ROC Curves and AUC Rankings}
 
-To further compare the performance of these modes, the receiver operating charactoristics (ROC) curves were plotted for each model and the area under the curve was calculated. The curves specific to classifying diabetes is in Figure \ref{fig:diabetes}, the curves specific to classifying prediabetes is shown in Figure \ref{fig:prediabetes}, and the plots specific to classifying no diabetes in shown in Figure \ref{fig:nodiabetes}.
-
-\pagebreak
+To further compare the performance of these modes, the receiver operating charactoristics (ROC) curves were plotted for each model and the area under the curve (AUC) was calculated. The curves specific to classifying diabetes is in Figure \ref{fig:diabetes}, the curves specific to classifying prediabetes is shown in Figure \ref{fig:prediabetes}, and the plots specific to classifying no diabetes in shown in Figure \ref{fig:nodiabetes}.
 
 \begin{figure}[h!]
     \includegraphics[scale=0.5]{ROC Comparison - Diabetes.png}
@@ -334,11 +333,11 @@ To further compare the performance of these modes, the receiver operating charac
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{ROC Comparison - No Diabetes.png}
-    \label{fig:nodiabetes}
     \caption{ROC Curves for No Diabetes Classification}
+    \label{fig:nodiabetes}
 \end{figure}
 
-\pagebreak
+\newpage
 
 When ranking the models based on AUC based on each classification, the Gaussian Naïve Bayes proves to be the strongest performing model. All the rankings are shown in Table \ref{table:auc-rankings}.
 
@@ -360,7 +359,7 @@ Rank & No Diabetes & Prediabetes & Diabetes \\
 
 \subsection{Cross Validation}
 
-A 10-fold cross validation was performed on each model, both to find the general accuracy of the models and the general precision when classifying prediabetes. The results can be found in Table \ref{table:cross-val} and Table \ref{table:prec-cross-val}. The logistic regression and KNN models were found to be the most accurate with an accuracy of 84.3\%. The model with the lowest accuracy was the Gaussian naïve bayes with an accuracy of 77.5\%. However, the Gaussian naïve Bayes had the greatest precision when predicting prediabetes; its precision rate was 29.9\%. 
+A 10-fold cross validation was performed on each model, both to find the general accuracy of the models and the general precision when classifying prediabetes. The results can be found in Table \ref{table:cross-val} and Table \ref{table:prec-cross-val}. The logistic regression and KNN models were found to be the most accurate with an accuracy of 84.3\%. The computational time required to validate these models was also significantly longer than that of the other models. The model with the lowest accuracy was the Gaussian naïve Bayes with an accuracy of 77.5\%. However, the Gaussian naïve Bayes had the greatest precision when predicting prediabetes; its precision rate was 29.9\%. 
 
 \begin{table}[h!]
     \centering
@@ -394,6 +393,8 @@ A 10-fold cross validation was performed on each model, both to find the general
     \label{table:prec-cross-val}
 \end{table}
 
+\pagebreak
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -401,7 +402,7 @@ Overall, the best classification model for this dataset was the Gaussian naïve 
 
 The discrepancy between the precision and accuracy of the predictions was unexpected. This investigation showed that a model's accuracy cannot be the only indicator of performance. Interestingly, the model with the lowest average accuracy was the Gaussian naïve Bayes. However, it showed the greatest precision when making individual classifications. For real-world applications, it is normal to have a high imbalance between classifications within a dataset. In this case, over 80\% of the dataset indicated no diabetes and only 2\% of the dataset made up the prediabetes category. The problem with using accuracy for a dataset with such imbalance is that accuracy treats all classes as equally important \cite{b13}. For this dataset and target classification problem, the precision is a more reliable indicator of performance as it measures how well the model predicts each individual classification. Using precision as the main performance indicator in this scenario is also very important as the cost of false positives is high; the model should therefore minimize false positives. This is crucial in healthcare scenarios (e.g. the classification of diabetes) where accurate identification of individuals at risk is very important.
 
-In the future, addressing the dataset's imbalance would significantly enhance the models' accuracy. Some strategies to alleviate this issue include resampling the data, using a different model that can handle imbalanced datasets more efficiently, and collecting more data in general. If resampling the data, the analyst could either oversample the prediabetes data or undersample the diabetes and no diabetes classes. Other models that can handle imbalanced datasets may be based on boosting or tree-based algorithms \cite{b14}. Another option that could enhance this classification problem is researching the most influential health indicators for diabetes prediction. For example, individuals over the age of 45 are more likely to be afflicted by diabetes \cite{b1}. Using this knowledge, more data can be collected from individuals in this age range, or the dataset could be reduced to only consist of individuals of the age 45 or over. In order to find a better fit model for classifying diabetes and prediabetes, the issue of dataset imbalance must be researched and remedied. 
+In the future, addressing the dataset's imbalance would significantly enhance the models' accuracy. Some strategies to alleviate this issue include resampling the data, using a different model that can handle imbalanced datasets more efficiently, and collecting more data in general. If resampling the data, the analyst could either oversample the prediabetes data or undersample the diabetes and no diabetes classes. In addition to resampling, other models not presented in this investigation that can handle imbalanced datasets are models based on boosting or tree-based algorithms such the AdaBoost classifier or the random forest classification model \cite{b14}. Another option that could enhance this classification problem is researching the most influential health indicators use in the diabetes prediction. For example, individuals over the age of 45 are more likely to be afflicted by diabetes \cite{b1}. Using this knowledge, more data can be collected from individuals in this age range, or the dataset could be reduced to only consist of individuals of the age 45 or over. In order to find a better fit model for classifying diabetes and prediabetes, the issue of dataset imbalance must be researched and remedied. Tnvestigating the impact of imbalanced data could provide insights into the progression of diabetes and refine predictive models for long-term prognosis and intervention strategies.
 
 \begin{thebibliography}{00}
 \bibitem{b1}	{“About Prediabetes and Type 2 Diabetes | National Diabetes Prevention Program | CDC.” Accessed: Nov. 23, 2023. [Online]. Available: https://www.cdc.gov/diabetes/prevention/about-prediabetes.html}
